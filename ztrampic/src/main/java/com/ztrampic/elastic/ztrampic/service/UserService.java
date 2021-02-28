@@ -7,4 +7,6 @@ import java.util.Set;
 public interface UserService {
     Set<User> findByName(String name);
     Set<User> getAll();
+    Set<User> findByRoleName(String roleName);
+    Set<User> findByRoleNameAndFilteredByTag(String roleName, String tag);
 }

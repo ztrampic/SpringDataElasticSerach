@@ -13,18 +13,32 @@ import java.util.Set;
 public class SearchResource {
 
     private final UserService userService;
+
     @Autowired
-    public SearchResource( UserService userService) {
+    public SearchResource(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/{name}")
-    public Set<User> searchByName(@PathVariable final String name){
-        return  userService.findByName(name);
+    public Set<User> searchByName(@PathVariable final String name) {
+        return userService.findByName(name);
     }
 
     @GetMapping("/all")
-    public Set<User> getAll(){
+    public Set<User> getAll() {
         return userService.getAll();
     }
+
+    @GetMapping("/byRole/{roleName}")
+    public Set<User> searchByRoleName(@PathVariable final String roleName){
+        Set<User> users = userService.findByRoleName(roleName);
+        return users;
+    }
+
+    @GetMapping("/filter/{roleName}/{tag}")
+    public Set<User> searchByRoleAndTag(@PathVariable final String roleName, @PathVariable final String tag){
+        return userService.findByRoleNameAndFilteredByTag(roleName, tag);
+    }
+
+
 }
